@@ -10,6 +10,7 @@
 !/_Scenes
 !/_UI
 !/_External
+!/_Runtime
 
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
