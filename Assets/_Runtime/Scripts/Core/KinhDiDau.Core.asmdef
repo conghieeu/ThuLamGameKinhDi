@@ -1,15 +1,13 @@
 {
-    "name": "KinhDiDau.UI",
+    "name": "KinhDiDau.Core",
     "rootNamespace": "",
     "references": [
-        "GUID:1054c38f6904fe249a56c0d91f41a1d6"
+        "GUID:fb24642277b1db2449da7ac148ce939d",
+        "GUID:8c4dd21966739024fbd72155091d199e",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
-    "excludePlatforms": [
-        "Editor",
-        "WebGL",
-        "WindowsStandalone32"
-    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

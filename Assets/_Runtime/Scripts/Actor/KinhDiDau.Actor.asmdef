@@ -1,15 +1,15 @@
 {
-    "name": "KinhDiDau.UI",
+    "name": "KinhDiDau.Actor",
     "rootNamespace": "",
     "references": [
         "GUID:1054c38f6904fe249a56c0d91f41a1d6"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [
+    "includePlatforms": [
         "Editor",
-        "WebGL",
-        "WindowsStandalone32"
+        "WindowsStandalone32",
+        "WindowsStandalone64"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
