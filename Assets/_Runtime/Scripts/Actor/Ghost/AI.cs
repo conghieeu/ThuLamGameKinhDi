@@ -1,12 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GhostAI : MonoBehaviour
+public class AI : MonoBehaviour
 {
     [SerializeField] Transform player;
     NavMeshAgent agent;
     Animator anim;
-    GhostState currentStage;
+    State currentStage;
 
     void Start()
     {

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI; 
- 
-public class GhostState: MonoBehaviour
+
+[Serializable]
+public class State
 {
     public enum STATE
     {
@@ -21,14 +22,14 @@ public class GhostState: MonoBehaviour
     protected GameObject npc;
     protected Animator anim;
     protected Transform player;
-    protected GhostState nextState;
+    protected State nextState;
     protected NavMeshAgent agent;
 
     float visDist = 10.0f;
     float visAngle = 30.0f;
     float shootDist = 7.0f;
 
-    public GhostState(GameObject npc, NavMeshAgent agent, Animator anim, Transform player)
+    public State(GameObject npc, NavMeshAgent agent, Animator anim, Transform player)
     {
         stage = EVENT.ENTER;
         this.npc = npc;
@@ -41,7 +42,7 @@ public class GhostState: MonoBehaviour
     public virtual void Update() { stage = EVENT.UPDATE; }
     public virtual void Exit() { stage = EVENT.EXIT; }
 
-    public GhostState Process()
+    public State Process()
     {
         if (stage == EVENT.ENTER) Enter();
         if (stage == EVENT.UPDATE) Update();
@@ -76,7 +77,7 @@ public class GhostState: MonoBehaviour
 
 }
 
-public class Idle : GhostState
+public class Idle : State
 {
     public Idle(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
                 : base(_npc, _agent, _anim, _player)
@@ -112,9 +113,8 @@ public class Idle : GhostState
     }
 }
 
-public class Patrol : GhostState
+public class Patrol : State
 {
-    GhostPatronPoints ghostPatronPoints;
     int currentIndex = -1;
 
     public Patrol(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
@@ -128,9 +128,9 @@ public class Patrol : GhostState
     public override void Enter()
     {
         float lastDist = Mathf.Infinity;
-        for(int i = 0; i < GhostPatronPoints.CheckPoints.Count; i++)
+        for(int i = 0;i<GameEnvironment.Singleton.CheckPoints.Count;i++)
         {
-            GameObject thisWP = GhostPatronPoints.CheckPoints[i];
+            GameObject thisWP = GameEnvironment.Singleton.CheckPoints[i];
             float distance=Vector3.Distance(npc.transform.position, thisWP.transform.position);
             if (distance < lastDist)
             {
@@ -147,12 +147,12 @@ public class Patrol : GhostState
     {
         if (agent.remainingDistance < 1)
         {
-            if (currentIndex >= GhostPatronPoints.CheckPoints.Count - 1)
+            if (currentIndex >= GameEnvironment.Singleton.CheckPoints.Count-1)
                 currentIndex = 0;
             else
                 currentIndex++;
 
-            agent.SetDestination(GhostPatronPoints.CheckPoints[currentIndex].transform.position);
+            agent.SetDestination(GameEnvironment.Singleton.CheckPoints[currentIndex].transform.position);
         }
 
         if (canSeePlayer())
@@ -169,7 +169,7 @@ public class Patrol : GhostState
     }
 }
 
-public class Pursue : GhostState
+public class Pursue : State
 {
     public Pursue(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player)
                 : base(_npc, _agent, _anim, _player)
@@ -211,7 +211,7 @@ public class Pursue : GhostState
     }
 }
 
-public class Attack : GhostState
+public class Attack : State
 {
     float rotationSpeed = 2.0f;
     AudioSource shoot;
