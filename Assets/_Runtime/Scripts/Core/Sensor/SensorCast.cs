@@ -46,7 +46,7 @@ public class SensorCast : MonoBehaviour
     private List<Transform> BoxCastHits()
     {
         RaycastHit[] hits = Physics.BoxCastAll(transform.position + localBoxPos, boxSize / 2f, transform.forward, transform.rotation, 0f, layerCast);
-        return hits.Select(x => x.transform).ToList<Transform>();
+        return hits.Select(x => x.transform).ToList();
     }
 
     // Vẽ box hit ra khi click vào thì thấy được box hit
