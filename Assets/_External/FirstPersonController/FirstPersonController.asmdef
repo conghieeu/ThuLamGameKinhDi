@@ -1,8 +1,9 @@
 {
-    "name": "KinhDiDau.External",
+    "name": "FirstPersonController",
     "rootNamespace": "",
     "references": [
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
