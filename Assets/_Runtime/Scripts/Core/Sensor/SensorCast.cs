@@ -1,35 +1,60 @@
-
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace CuaHang
+[RequireComponent(typeof(VisionChecker))]
+
+/// <summary> Sử dụng Physics.BoxCastAll để phát hiện va chạm </summary>
+public class SensorCast : MonoBehaviour
 {
-    /// <summary> Sử dụng Physics.BoxCastAll để phát hiện va chạm </summary>
-    public class SensorCast : MonoBehaviour
+    public LayerMask layerCast;
+    public List<Transform> boxCastHits;
+    public List<Transform> visionHits;
+    public Color colorGizmos;
+    public Vector3 boxSize;
+    public Vector3 localBoxPos;
+
+    VisionChecker visionChecker;
+
+    private void Start()
     {
-        public LayerMask _layer;
-        public List<Transform> _hits;
-        [SerializeField] protected Vector3 _size;
+        visionChecker = GetComponent<VisionChecker>();
+    }
 
-        private void Update()
+    private void FixedUpdate()
+    {
+        boxCastHits = BoxCastHits();
+        visionHits = GetObjectHitsInVision(boxCastHits);
+    }
+
+    private List<Transform> GetObjectHitsInVision(List<Transform> hits)
+    {
+        List<Transform> hitsInVision = new();
+
+        foreach (Transform t in hits)
         {
-            _hits = BoxCastHits();
-        }
- 
-        /// <summary> Gọi liên tục để lấy va chạm </summary>
-        private List<Transform> BoxCastHits()
-        {
-            RaycastHit[] hits = Physics.BoxCastAll(transform.position, _size / 2f, transform.forward, transform.rotation, 0f, _layer);
-            return hits.Select(x => x.transform).ToList();
+            if (visionChecker.IsSeePoint(t))
+            {
+                hitsInVision.Add(t);
+            }
         }
 
-        // Vẽ box hit ra khi click vào thì thấy được box hit
-        private void OnDrawGizmosSelected()
-        {
-            Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position, transform.rotation, _size);
-            Gizmos.matrix = rotationMatrix;
-            Gizmos.DrawWireCube(Vector3.zero, _size);
-        }
+        return hitsInVision;
+    }
+
+    /// <summary> Gọi liên tục để lấy va chạm </summary>
+    private List<Transform> BoxCastHits()
+    {
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position + localBoxPos, boxSize / 2f, transform.forward, transform.rotation, 0f, layerCast);
+        return hits.Select(x => x.transform).ToList<Transform>();
+    }
+
+    // Vẽ box hit ra khi click vào thì thấy được box hit
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = colorGizmos;
+        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.position + localBoxPos, transform.rotation, boxSize);
+        Gizmos.matrix = rotationMatrix;
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
     }
 }

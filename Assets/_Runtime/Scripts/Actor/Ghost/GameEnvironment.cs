@@ -28,7 +28,5 @@ public sealed class GameEnvironment
             return instance;
         }
     }
-
-
  
 }
