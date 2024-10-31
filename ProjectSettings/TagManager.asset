@@ -4,30 +4,30 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - FxTemporaire
-  - Coin
-  - Virus
+  - Flesh
+  - Water
+  - Zombie
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Ground
-  - InspectableItem
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Zombie
+  - Interact
+  - BodyPart
+  - PlayerBody
+  - PlayerInvisible
+  - PostProcessing Main
+  - PostProcessing Arms
+  - CamExamination
+  - CamWeapon
+  - Ladder
+  - CamSecondExamination
+  - Threat
   - 
   - 
   - 
