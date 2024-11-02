@@ -143,7 +143,6 @@ public class Item : ScriptableObject
     }
 
     // Lệnh console để spawn một Item
-    [ConsoleCommand]
     public static void SpawnItem(Item item)
     {
         Debug.Log("Spawn item: " + item.name);
