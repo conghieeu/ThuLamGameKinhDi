@@ -1,11 +1,7 @@
 ﻿using System;
 using DefaultNamespace;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
-using Zorro.Core;
-using Zorro.Core.Serizalization;
-using pworld.Scripts.Extensions;
 
 public class ItemInstance : MonoBehaviour
 {
