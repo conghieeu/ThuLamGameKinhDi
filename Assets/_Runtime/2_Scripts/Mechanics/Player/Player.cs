@@ -512,8 +512,6 @@ public class Player : MonoBehaviour
 
 		public PlayerInteraction interaction;
 
-		public PlayerVisor visor;
-
 		public Rig IKRig;
 
 		public TwoBoneIKConstraint IK_Right;
@@ -531,12 +529,6 @@ public class Player : MonoBehaviour
 		public SkinnedMeshRenderer bodyMeshRenderer;
 
 		internal SphereCollider simpleCollider;
-
-		public CursedPlayerBoss curses;
-
-		public WalkieTalkiePlayer walkieTalkiePlayer;
-
-		public PlayerEmotes emotes;
 	}
 
 	public static Player localPlayer;
